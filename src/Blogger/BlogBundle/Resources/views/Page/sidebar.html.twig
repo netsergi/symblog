@@ -1,0 +1,48 @@
+{# src/Blogger/BlogBundle/Resources/views/Page/sidebar.html.twig #}
+
+<section class="section">
+    <header>
+        <h3>Nubol de tags</h3>
+    </header>
+        <p class="tags">
+        {% for tag,weight in tags %}
+            <span class="weight-{{weight}}">{{tag}}</span>
+        {% else %}
+            <p>There are no tags</p>
+        {% endfor %}    
+    </p>
+</section>
+<section class="section">
+    <header>
+        <h3>Darrers comentaris: </h3>
+    </header>
+    {% for comment in latestComments %}
+        <article class="comment">
+            <header>
+                <p class="small"><span class="highlight">{{ comment.user }}</span> commented on
+                    <a href="{{ path('BloggerBlogBundle_show', { 'id': comment.blog.id }) }}#comment-{{ comment.id }}">
+                        {{ comment.blog.title }}
+                    </a>
+                    [<em><time datetime="{{ comment.created|date('c') }}">{{ comment.created|created_ago }}</time></em>]
+                </p>
+            </header>
+            <p>{{ comment.comment | slice(0, 50)}}...</p>
+            </p>
+        </article>
+    {% else %}
+        <p>There are no recent comments</p>
+    {% endfor %}
+</section>
+<section class="section">
+    <header>
+
+        <h3>Els nostres autors: </h3>
+    </header>
+        <p>
+        {% for autor in autors %}
+            <p>{{autor[0].nom}} ({{ autor[0].blogs | length }})</p>
+        {% else %}
+            <p>There are no tags</p>
+        {% endfor %}    
+    </p>
+</section>

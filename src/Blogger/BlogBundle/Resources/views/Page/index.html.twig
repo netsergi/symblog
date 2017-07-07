@@ -1,0 +1,38 @@
+{# src/Blogger/BlogBundle/Resources/views/Page/index.html.twig #}
+{% extends 'BloggerBlogBundle::base.html.twig' %}
+
+{% block body %}
+    {% for blog in blogs %}
+        <article class="blog">
+            <div class="date"><img style="width: 35px; height: 35px; border: 0px; padding: 0px;" class="icono" src="{{ asset('images/calen.png') }}"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('l, F j, Y') }}</time></div>
+            <header>
+                <h2><a href="{{ path('BloggerBlogBundle_show', { 'id': blog.id }) }}">{{ blog.title|upper }}</a></h2>
+            </header>
+
+            <img src="{{ asset(['bundles/bloggerblog/images/', blog.image]|join) }}" />
+            <div class="snippet">
+                <p>{{ blog.blog(300) }} ...</p>
+                <p class="continue"><a href="{{ path('BloggerBlogBundle_show', { 'id': blog.id }) }}">Continue reading...</a></p>
+           </div>        
+            <footer class="meta">
+                <p>Comments: <a href="{{ path('BloggerBlogBundle_show', { 'id': blog.id }) }}#comments">{{ blog.comments|length }}</a></p>
+                <p>Posted by <span class="highlight"></span> at {{ blog.created|date('h:iA') }} 
+                {% if blog.comments | length > 0 %} 
+                    (Ultimo post:    
+                    {% set recent = blog.comments.toArray() 
+                    [blog.comments | length -1] %}
+                    {{ recent.created | date('l, F j, Y') }}
+                    | {{ recent.user }})
+                {% endif %}
+                </p>
+                <p>Tags (<span class="highlight">{{ blog.tagsCol | length }}</span>): <span class="highlight">
+                    {% for tagsCol in blog.tagsCol %}                    
+                        {{ tagsCol.tagname }}           
+                    {% endfor %}
+                </span></p>
+            </footer>
+        </article>     
+    {% else %}
+        <p>There are no blog entries for symblog</p>
+    {% endfor %}
+{% endblock %}

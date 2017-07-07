@@ -1,0 +1,19 @@
+<?php
+// src/Blogger/BlogBundle/Entity/Enquiry.php
+
+namespace Blogger\BlogBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="product")
+ */
+class Enquiry
+{
+    protected $name;
+
+    protected $email;
+
+    protected $subject;
+
+    protected $body;
+}

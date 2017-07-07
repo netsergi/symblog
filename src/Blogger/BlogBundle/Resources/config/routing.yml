@@ -1,0 +1,46 @@
+# src/Blogger/BlogBundle/Resources/config/routing.yml
+
+BloggerBlogBundle_homepage:
+    path:  /
+    defaults: { _controller: BloggerBlogBundle:Page:index }
+    requirements:
+        _method:  GET
+
+BloggerBlogBundle_about:
+    path:  /about
+    defaults: { _controller: BloggerBlogBundle:Page:about }
+    requirements:
+        _method:  GET
+
+BloggerBlogBundle_contact:
+    path:  /contact
+    defaults: { _controller: BloggerBlogBundle:Page:contact }
+    requirements:
+        _method:  GET
+
+BloggerBlogBundle_show:
+    path:  /{id}
+    defaults: { _controller: BloggerBlogBundle:Blog:show }
+    requirements:
+        _method:  GET
+        id: \d+
+        
+blogger_blog_blog_create:
+    path: /create
+    defaults: { _controller: BloggerBlogBundle:Blog:create }
+    requirements:
+        _method:  GET
+
+blogger_blog_blog_edit:
+    path: /edit/{id}
+    defaults: { _controller: BloggerBlogBundle:Blog:edit }
+    requirements:
+        _method:  GET
+
+blogger_blog_comment_create:
+    path:  /comment/{blog_id}
+    defaults: { _controller: BloggerBlogBundle:Comment:create }
+    requirements:
+        _method:  POST
+        blog_id: \d+
+      

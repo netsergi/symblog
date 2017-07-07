@@ -1,0 +1,40 @@
+
+{% extends 'BloggerBlogBundle::base.html.twig' %}
+
+{% block title %}Contact{% endblock%}
+
+{% block body %}
+    
+
+       <div id="#header"> 
+            <h2> Contact symblog </h2>
+        </div>
+        
+
+
+    {% for flashMessage in app.session.flashbag.get('blogger-notice') %}
+        
+
+        <div class="blogger-notice"> {{ flashMessage }} </div>
+        
+
+    {% endfor %}
+
+    
+    Want to contact symblog? <br><br>
+
+
+ <form name='contact' action="{{ path('BloggerBlogBundle_contact') }}" method="post" class="blogger">   
+
+      {{ form_row(form.name) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.subject) }}
+        {{ form_row(form.departament) }}
+        {{ form_row(form.body) }}
+        {{ form_rest(form) }}
+    <input type="submit" class="w3-button w3-green" />
+</form>
+
+
+
+{% endblock %}
